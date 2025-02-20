@@ -2,9 +2,13 @@
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Elements")]
+    [SerializeField] CrowdSystem crowdSystem;
+
     [Header("Settings")]
     [SerializeField] float speed;
     [SerializeField] float slideSpeed;
+    [SerializeField] float roadWidth;
 
     private Vector3 clickedScreenPosition;
     private Vector3 clickedPlayerPosition;
@@ -43,7 +47,11 @@ public class PlayerController : MonoBehaviour
             xScreenDifference *= slideSpeed;
 
             Vector3 position = transform.position;
+
             position.x = clickedPlayerPosition.x + xScreenDifference;
+
+            position.x = Mathf.Clamp(position.x, -roadWidth / 2 + crowdSystem.GetCrowdRadius(), roadWidth / 2 - crowdSystem.GetCrowdRadius());
+
             transform.position = position;
 
             //Burada hata yaşamamızın sebebi transform.position dediğimiz zaman x y ve z'yi aynı anda kontrol etmeye çalışıyoruz yukarıdaki yöntemde sadece x'i kontrol ediyoruz.
