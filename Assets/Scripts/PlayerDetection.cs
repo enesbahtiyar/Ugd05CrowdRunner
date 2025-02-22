@@ -29,6 +29,9 @@ public class PlayerDetection : MonoBehaviour
             if (detectedColliders[i].CompareTag("Finish"))
             {
                 Debug.Log("Oyun bitti");
+
+                PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level") + 1);
+
                 SceneManager.LoadScene(0);
             }
         }

@@ -1,28 +1,76 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
+    public static PlayerController instance;
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
+
     [Header("Elements")]
     [SerializeField] CrowdSystem crowdSystem;
+    [SerializeField] PlayerAnimator playerAnimator;
 
     [Header("Settings")]
     [SerializeField] float speed;
     [SerializeField] float slideSpeed;
     [SerializeField] float roadWidth;
+    private bool canMove;
 
     private Vector3 clickedScreenPosition;
     private Vector3 clickedPlayerPosition;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
-        MoveForward();
-        ManageControl();
+        if(canMove == true)
+        {
+            MoveForward();
+            ManageControl();
+        }
+    }
+
+    private void OnEnable()
+    {
+        GameManager.onGameStateChanged += GameStateChangedCallback;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.onGameStateChanged -= GameStateChangedCallback;
+    }
+
+    private void GameStateChangedCallback(GameState state)
+    {
+        if(state == GameState.Game)
+        {
+            StartMoving();
+        }
+    }
+
+
+
+    private void StartMoving()
+    {
+        canMove = true;
+        playerAnimator.Run();
+    }
+
+    private void StopMoving()
+    {
+        canMove = false;
+        playerAnimator.Idle();
     }
 
     /// <summary>

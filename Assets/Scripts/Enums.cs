@@ -5,3 +5,11 @@ public enum BonusType
     Multiplication,
     Division
 }
+
+public enum GameState
+{
+    Menu,
+    Game,
+    LevelComplete,
+    GameOver
+}
