@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+
         if (instance != null)
         {
             Destroy(gameObject);
@@ -56,6 +57,15 @@ public class PlayerController : MonoBehaviour
         if(state == GameState.Game)
         {
             StartMoving();
+        }
+        else if(state == GameState.GameOver) 
+        {
+            StopMoving();
+        }
+        else if(state == GameState.LevelComplete)
+        {
+            StopMoving();
+            playerAnimator.Idle();
         }
     }
 

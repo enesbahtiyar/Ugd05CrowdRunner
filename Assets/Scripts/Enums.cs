@@ -13,3 +13,9 @@ public enum GameState
     LevelComplete,
     GameOver
 }
+
+public enum EnemyStates
+{
+    Idle,
+    Running
+}

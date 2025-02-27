@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerAnimator : MonoBehaviour
@@ -22,6 +23,16 @@ public class PlayerAnimator : MonoBehaviour
             Transform runner = runnerParent.GetChild(i);
             Animator runnerAnim = runner.GetComponent<Animator>();
             runnerAnim.Play("Idle");
+        }
+    }
+
+    internal void Dance()
+    {
+        for (int i = 0; i < runnerParent.childCount; i++)
+        {
+            Transform runner = runnerParent.GetChild(i);
+            Animator runnerAnim = runner.GetComponent<Animator>();
+            runnerAnim.Play("Dance");
         }
     }
 }

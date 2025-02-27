@@ -6,10 +6,14 @@ public class PlayerDetection : MonoBehaviour
     [SerializeField] private CrowdSystem crowdSystem;
     private void Update()
     {
-        DetectDoors();
+        if(GameManager.instance.isGameState())
+        {
+            DetectColliders();
+        }
+
     }
 
-    private void DetectDoors()
+    private void DetectColliders()
     {
         Collider[] detectedColliders = Physics.OverlapSphere(transform.position, 1);
 
@@ -28,11 +32,9 @@ public class PlayerDetection : MonoBehaviour
 
             if (detectedColliders[i].CompareTag("Finish"))
             {
-                Debug.Log("Oyun bitti");
-
                 PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level") + 1);
 
-                SceneManager.LoadScene(0);
+                GameManager.instance.SetGameState(GameState.LevelComplete);
             }
         }
     }
