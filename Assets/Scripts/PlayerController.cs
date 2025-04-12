@@ -1,22 +1,11 @@
 ﻿using System;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : SingletonMonoBehaviour<PlayerController>
 {
-
-    public static PlayerController instance;
-
-    private void Awake()
+    protected override void Awake()
     {
-
-        if (instance != null)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-        }
+        base.Awake();
     }
 
     [Header("Elements")]

@@ -24,7 +24,7 @@ public class UIManager : MonoBehaviour
         gameOverPanel.SetActive(false);
         levelCompletePanel.SetActive(false);
 
-        levelText.text = "Level " + (ChunkManager.instance.GetLevel() + 1);
+        levelText.text = "Level " + (ChunkManager.Instance.GetLevel() + 1);
     }
 
     private void OnEnable()
@@ -89,7 +89,7 @@ public class UIManager : MonoBehaviour
         if (!GameManager.instance.isGameState())
             return;
 
-        float progress = PlayerController.instance.transform.position.z / ChunkManager.instance.GetFinishZ();
+        float progress = PlayerController.Instance.transform.position.z / ChunkManager.Instance.GetFinishZ();
 
         progressBar.value = progress;
     }

@@ -2,23 +2,12 @@
 using UnityEngine;
 
 
-public class ChunkManager : MonoBehaviour
+public class ChunkManager : SingletonMonoBehaviour<ChunkManager>
 {
-    #region Singleton
-    public static ChunkManager instance;
-
-    private void Awake()
+    protected override void Awake()
     {
-        if(instance != null)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-        }
+        base.Awake();
     }
-    #endregion
 
     [Header("Elements")]
     [SerializeField] private LevelSO[] levels;
