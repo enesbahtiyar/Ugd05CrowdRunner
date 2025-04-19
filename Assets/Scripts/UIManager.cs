@@ -6,6 +6,8 @@ using System;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] private ShopManager shopManager;
+
     [Header("Elements")]
     [SerializeField] GameObject menuPanel;
     [SerializeField] GameObject gamePanel;
@@ -13,6 +15,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject levelCompletePanel;
     [SerializeField] Slider progressBar;
     [SerializeField] TextMeshProUGUI levelText;
+    [SerializeField] private GameObject shopPanel;
 
 
     private void Start()
@@ -23,6 +26,7 @@ public class UIManager : MonoBehaviour
         menuPanel.SetActive(true);
         gameOverPanel.SetActive(false);
         levelCompletePanel.SetActive(false);
+        HideShop();
 
         levelText.text = "Level " + (ChunkManager.Instance.GetLevel() + 1);
     }
@@ -92,5 +96,16 @@ public class UIManager : MonoBehaviour
         float progress = PlayerController.Instance.transform.position.z / ChunkManager.Instance.GetFinishZ();
 
         progressBar.value = progress;
+    }
+
+    public void ShowShop()
+    {
+        shopPanel.SetActive(true);
+        shopManager.UpdatePurchaseButton();
+    }
+
+    public void HideShop()
+    {
+        shopPanel.SetActive(false);
     }
 }

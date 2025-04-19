@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -43,6 +44,18 @@ public class DataManager : SingletonMonoBehaviour<DataManager>
     public void AddCoins(int amount)
     {
         coins += amount;
+        UpdateCoinsText();
+        PlayerPrefs.SetInt("coins", coins);
+    }
+
+    public int GetCoins()
+    {
+        return coins;
+    }
+
+    public void UseCoins(int amount)
+    {
+        coins -= amount;
         UpdateCoinsText();
         PlayerPrefs.SetInt("coins", coins);
     }

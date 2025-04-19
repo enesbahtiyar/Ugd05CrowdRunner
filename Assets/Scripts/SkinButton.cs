@@ -36,7 +36,7 @@ public class SkinButton : MonoBehaviour
             Lock();
     }
 
-    private void Unlock()
+    public void Unlock()
     {
         thisButton.interactable = true;
         skinImage.gameObject.SetActive(true);
@@ -45,7 +45,7 @@ public class SkinButton : MonoBehaviour
         unlocked = true;
     }
 
-    private void Lock()
+    public void Lock()
     {
         thisButton.interactable = false;
         skinImage.gameObject.SetActive(false);
